@@ -105,5 +105,28 @@ qiime emperor plot \
   --m-metadata-file metadata.tsv \
   --o-visualization unweighted-unifrac-pcoa.qzv
 
-  
+#### selecting sampling depth ####
 
+import pandas as pd
+import numpy as np
+
+# Load the TSV file, skipping the first row (header with #OTU ID)
+df = pd.read_csv('exported-table/feature-table.tsv', sep='\t', skiprows=1, index_col=0)
+
+# Calculate total reads per sample (sum across rows for each column)
+sample_sums = df.sum(axis=0)
+
+# Calculate a potential sampling depth (e.g., 10th percentile)
+p10 = np.percentile(sample_sums, 10)
+print(f"10th percentile of read counts: {p10}")
+print(f"Minimum read count: {sample_sums.min()}")
+print(f"Median read count: {sample_sums.median()}")
+
+
+qiime diversity core-metrics-phylogenetic \
+  --i-table table.qza \
+  --i-phylogeny rooted-tree.qza \
+  --p-sampling-depth 5000 \
+  --m-metadata-file metadata.tsv \
+  --o-rarefied-table rarefied-table.qza \
+  --o-shannon-vector shannon.qza
