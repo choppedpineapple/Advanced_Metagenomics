@@ -1,8 +1,3 @@
-Yes, I'm familiar with the standard Illumina naming format for paired-end gzipped reads. I can help you create a bash script segment to check if the files in your sample directory follow this format.
-
-Here's a bash script snippet that checks if the files in your sample directory match the Illumina format pattern and exits with an error message if they don't:
-
-```bash
 #!/bin/bash
 
 # Check if files in sample directory match Illumina naming convention
@@ -43,8 +38,8 @@ if [ "$invalid_files" -gt 0 ]; then
 fi
 
 echo "All files follow Illumina naming convention"
-```
 
+```
 This script:
 1. Defines the Illumina pattern to match against
 2. Counts the total number of fastq.gz files
@@ -53,3 +48,4 @@ This script:
 5. Exits with an error message if any files don't match or if the R1/R2 counts are unequal
 
 You can integrate this snippet into your larger workflow script.
+```
