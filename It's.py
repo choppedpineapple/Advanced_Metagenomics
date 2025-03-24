@@ -1,4 +1,20 @@
 #!/usr/bin/env python3
+
+# Extract max_key from header if available - with better error handling
+try:
+    if 'maxkey' in header_info:
+        max_key = header_info.split('maxkey')[1].strip()
+    elif '_' in header_info and len(header_info.split('_')) > 1:
+        max_key = header_info.split('_')[1].strip()
+    else:
+        max_key = "unknown"  # Default if we can't parse it
+except Exception:
+    max_key = "unknown"
+
+
+
+
+
 import os
 import time
 import logging
