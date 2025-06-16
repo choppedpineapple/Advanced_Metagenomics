@@ -26,3 +26,9 @@ kraken2 --paired \
   --report $OUTDIR/${SAMPLE}_report.txt \
   --output $OUTDIR/${SAMPLE}_output.txt \
   $R1 $R2
+
+-----------
+
+NUM_SAMPLES=$(wc -l < sample_names.txt)
+
+sbatch --array=0-$(($(wc -l < sample_names.txt)-1)) kraken2_array.slurm
