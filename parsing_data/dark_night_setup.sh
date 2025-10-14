@@ -1,8 +1,8 @@
 mkdir -p ~/.vim/colors
-nano ~/.vim/colors/abhi_night.vim
+nano ~/.vim/colors/dark_night.vim
 
 #to vimrc
-colorscheme abhi_night
+colorscheme dark_night
 set termguicolors
 
 #optional
