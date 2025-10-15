@@ -10,3 +10,13 @@ vsearch --cluster_fast upstream_90bp.fa --id 0.9 --centroids clonotypes.fa
 
 spades.py -s cluster1_reads.fastq -k 127 -o cluster1_assembly
 
+-----------------
+
+# 1. Convert fastq → fasta if not already
+seqtk seq -a merged.fastq > merged.fasta
+
+# 2. Find linker matches and save coordinates
+seqkit locate -p "GGTGGTGGTGGTAGC" -i merged.fasta > locate.tsv
+
+# 3. Extract 90 bases upstream of each linker occurrence
+seqkit subseq -f locate.tsv -u 90 merged.fasta > upstream_90.fa
