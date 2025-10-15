@@ -1,89 +1,89 @@
-" Abhi Night — a low-contrast, beautiful Vim theme
-" Author: Dark
-" Feel: Soft dark, slightly desaturated, calming tones
+if exists("g:colors_name")
+  finish
+endif
 
 set background=dark
-highlight clear
-if exists("syntax_on")
-  syntax reset
+if has("termguicolors")
+  set termguicolors
 endif
+
 let g:colors_name = "dark_night"
 
-" Base palette
-let s:bg       = "#1c1c1c"
-let s:bg_dark  = "#161616"
-let s:fg       = "#d0d0d0"
-let s:fg_dim   = "#999999"
-let s:accent   = "#89b482"   " subtle green
-let s:blue     = "#7aa2f7"
-let s:purple   = "#bb9af7"
-let s:orange   = "#e0af68"
-let s:red      = "#f7768e"
-let s:cyan     = "#7dcfff"
-let s:comment  = "#707070"
-let s:cursor   = "#c0caf5"
+" Palette (literal hex values)
+" bg:        #1c1c1c
+" bg_dark:   #161616
+" fg:        #d0d0d0
+" fg_dim:    #999999
+" accent:    #89b482
+" blue:      #7aa2f7
+" purple:    #bb9af7
+" orange:    #e0af68
+" red:       #f7768e
+" cyan:      #7dcfff
+" comment:   #707070
+" cursor:    #c0caf5
 
-" General
-hi Normal        guifg=s:fg       guibg=s:bg
+hi clear
+syntax reset
+
+hi Normal        guifg=#d0d0d0    guibg=#1c1c1c
 hi CursorLine    guibg=#202020
 hi CursorColumn  guibg=#202020
-hi LineNr        guifg=#555555    guibg=s:bg_dark
-hi CursorLineNr  guifg=s:orange   guibg=#202020 gui=bold
-hi Comment       guifg=s:comment  gui=italic
-hi Constant      guifg=s:purple
-hi String        guifg=s:accent
-hi Character     guifg=s:accent
-hi Number        guifg=s:orange
-hi Boolean       guifg=s:orange
-hi Identifier    guifg=s:cyan
-hi Function      guifg=s:blue     gui=bold
-hi Statement     guifg=s:purple   gui=bold
-hi Keyword       guifg=s:purple
-hi Conditional   guifg=s:red
-hi Repeat        guifg=s:red
-hi Operator      guifg=s:fg
-hi Exception     guifg=s:red      gui=italic
-hi Type          guifg=s:accent   gui=bold
-hi StorageClass  guifg=s:cyan
-hi Structure     guifg=s:accent
-hi Typedef       guifg=s:cyan
-hi Special       guifg=s:orange
-hi PreProc       guifg=s:blue
-hi Include       guifg=s:blue
-hi Define        guifg=s:orange
-hi Macro         guifg=s:cyan
-hi PreCondit     guifg=s:orange
-hi Title         guifg=s:blue     gui=bold
-hi Todo          guifg=s:red      guibg=#2a2a2a gui=bold,italic
+hi LineNr        guifg=#555555    guibg=#161616
+hi CursorLineNr  guifg=#e0af68    guibg=#202020 gui=bold
+hi Comment       guifg=#707070    gui=italic
+hi Constant      guifg=#bb9af7
+hi String        guifg=#89b482
+hi Character     guifg=#89b482
+hi Number        guifg=#e0af68
+hi Boolean       guifg=#e0af68
+hi Identifier    guifg=#7dcfff
+hi Function      guifg=#7aa2f7    gui=bold
+hi Statement     guifg=#bb9af7    gui=bold
+hi Keyword       guifg=#bb9af7
+hi Conditional   guifg=#f7768e
+hi Repeat        guifg=#f7768e
+hi Operator      guifg=#d0d0d0
+hi Exception     guifg=#f7768e    gui=italic
+hi Type          guifg=#89b482    gui=bold
+hi StorageClass  guifg=#7dcfff
+hi Structure     guifg=#89b482
+hi Typedef       guifg=#7dcfff
+hi Special       guifg=#e0af68
+hi PreProc       guifg=#7aa2f7
+hi Include       guifg=#7aa2f7
+hi Define        guifg=#e0af68
+hi Macro         guifg=#7dcfff
+hi PreCondit     guifg=#e0af68
+hi Title         guifg=#7aa2f7    gui=bold
+hi Todo          guifg=#f7768e    guibg=#2a2a2a gui=bold,italic
 hi Visual        guibg=#333333
-hi Search        guibg=#404040    guifg=s:orange
-hi IncSearch     guibg=s:orange   guifg=s:bg
+hi Search        guibg=#404040    guifg=#e0af68
+hi IncSearch     guibg=#e0af68    guifg=#1c1c1c
 hi VertSplit     guifg=#333333
-hi StatusLine    guibg=#2a2a2a    guifg=s:fg gui=bold
-hi StatusLineNC  guibg=#1e1e1e    guifg=s:fg_dim
-hi Pmenu         guibg=#2a2a2a    guifg=s:fg
-hi PmenuSel      guibg=s:blue     guifg=s:bg
+hi StatusLine    guibg=#2a2a2a    guifg=#d0d0d0 gui=bold
+hi StatusLineNC  guibg=#1e1e1e    guifg=#999999
+hi Pmenu         guibg=#2a2a2a    guifg=#d0d0d0
+hi PmenuSel      guibg=#7aa2f7    guifg=#1c1c1c
 hi PmenuSbar     guibg=#2a2a2a
 hi PmenuThumb    guibg=#555555
-hi DiffAdd       guibg=#203020    guifg=s:accent
+hi DiffAdd       guibg=#203020    guifg=#89b482
 hi DiffChange    guibg=#303020
-hi DiffDelete    guibg=#301a1a    guifg=s:red
-hi DiffText      guibg=#403030    guifg=s:orange
-hi Underlined    guifg=s:cyan     gui=underline
-hi MatchParen    guibg=#303030    guifg=s:orange gui=bold
-hi Directory     guifg=s:blue
-hi Error         guibg=#3a1a1a    guifg=s:red gui=bold
-hi WarningMsg    guifg=s:orange
-hi ErrorMsg      guifg=s:red      guibg=#2a1a1a
-hi SignColumn    guibg=s:bg_dark  guifg=s:fg_dim
+hi DiffDelete    guibg=#301a1a    guifg=#f7768e
+hi DiffText      guibg=#403030    guifg=#e0af68
+hi Underlined    guifg=#7dcfff    gui=underline
+hi MatchParen    guibg=#303030    guifg=#e0af68 gui=bold
+hi Directory     guifg=#7aa2f7
+hi Error         guibg=#3a1a1a    guifg=#f7768e gui=bold
+hi WarningMsg    guifg=#e0af68
+hi ErrorMsg      guifg=#f7768e    guibg=#2a1a1a
+hi SignColumn    guibg=#161616    guifg=#999999
 
-" Subtle folds & background tone
-hi Folded        guibg=#202020    guifg=s:fg_dim gui=italic
-hi FoldColumn    guibg=s:bg_dark  guifg=s:fg_dim
+hi Folded        guibg=#202020    guifg=#999999 gui=italic
+hi FoldColumn    guibg=#161616    guifg=#999999
 hi NonText       guifg=#333333
 hi EndOfBuffer   guifg=#333333
-hi Conceal       guifg=s:fg_dim   guibg=s:bg
+hi Conceal       guifg=#999999    guibg=#1c1c1c
 
-" Cursor
-hi Cursor        guifg=s:bg       guibg=s:cursor
-hi TermCursor    guifg=s:bg       guibg=s:cursor
+hi Cursor        guifg=#1c1c1c     guibg=#c0caf5
+hi TermCursor    guifg=#1c1c1c     guibg=#c0caf5
