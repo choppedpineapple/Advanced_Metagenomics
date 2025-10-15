@@ -9,3 +9,10 @@ set termguicolors
 set cursorline
 set number
 set relativenumber
+
+"======================"
+if has("termguicolors")
+  set termguicolors
+endif
+set background=dark
+colorscheme dark_night
