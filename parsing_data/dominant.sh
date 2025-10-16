@@ -30,3 +30,18 @@ bcftools consensus -f scfv_ref.fasta calls.filtered.vcf.gz > scfv_consensus.fa
 transeq -sequence scfv_consensus.fa -outseq scfv_consensus.aa.fasta
 # or python quick check for stop codons
 
+----------
+
+# Map cluster reads to reference
+bwa mem -t 8 scfv_ref.fasta cluster_R1.fastq cluster_R2.fastq | samtools sort -o cluster.bam
+samtools index cluster.bam
+
+# Generate pileup + call variants
+bcftools mpileup -Ou -f scfv_ref.fasta cluster.bam | \
+  bcftools call -mv -Oz -o cluster.vcf.gz
+
+# Index VCF
+bcftools index cluster.vcf.gz
+
+# Create consensus FASTA
+bcftools consensus -f scfv_ref.fasta cluster.vcf.gz > cluster_consensus.fa
