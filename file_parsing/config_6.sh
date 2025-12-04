@@ -1,0 +1,21 @@
+cutadapt \
+    -j 4 \
+    -g X=ACGTGATTCAAGTGCTAGAC;rc \
+    -g Y=TGATCCAGGACTTGGATAAC;rc \
+    -a X=ACGTGATTCAAGTGCTAGAC;rc \
+    -a Y=TGATCCAGGACTTGGATAAC;rc \
+    -o trimmed.fastq \
+    input.fastq
+
+cutadapt \
+    -j 4 \
+    -g FWD=ACGTGATTCAAGTGCTAGAC \
+    -g FWD_RC=GTCTAGCACTTGAATCACGT \
+    -g REV=TGATCCAGGACTTGGATAAC \
+    -g REV_RC=GTTATCCAAGTCCTGGATCA \
+    -a FWD=ACGTGATTCAAGTGCTAGAC \
+    -a FWD_RC=GTCTAGCACTTGAATCACGT \
+    -a REV=TGATCCAGGACTTGGATAAC \
+    -a REV_RC=GTTATCCAAGTCCTGGATCA \
+    -o trimmed.fastq \
+    input.fastq
