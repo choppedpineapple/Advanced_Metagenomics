@@ -1,9 +1,4 @@
-" ============================================================
-"   ABHI'S NEON MATRIX VIM CONFIG (NO PLUGINS)
-"   Pure .vimrc. Pure violence. Pure drip.
-" ============================================================
-
-" ----- BASIC SETTINGS --------------------------------------------------------
+" ----- BASIC SETTINGS -----------------------------------------
 
 set nocompatible
 syntax on
@@ -42,10 +37,9 @@ set undofile
 set wildmenu
 set wildmode=longest:full,full
 
-" Make backspace behave like a normal person
 set backspace=indent,eol,start
 
-" ----- MATRIX-NEON COLORSCHEME (BUILT-IN) ------------------------------------
+" ----- BUILT-IN NEON COLORSCHEME ------------------------------
 
 hi clear
 if exists("syntax_on")
@@ -53,67 +47,82 @@ if exists("syntax_on")
 endif
 let g:colors_name = "neon_matrix"
 
-let s:bg      = "#050811"
-let s:bg_d    = "#02040a"
-let s:bg_l    = "#101320"
-let s:fg      = "#c8d3f5"
-let s:fg_dim  = "#7a88c7"
-let s:cyan    = "#00f0ff"
-let s:cyan_d  = "#00b3c4"
-let s:mag     = "#ff007c"
-let s:green   = "#a3ff12"
-let s:yellow  = "#ffc857"
-let s:red     = "#ff4b5c"
-let s:orange  = "#ff9f1c"
-
 " Core UI
-exe "hi Normal       guifg=" . s:fg     . " guibg=" . s:bg
-exe "hi CursorLine   guibg=" . s:bg_l
-exe "hi CursorLineNr guifg=" . s:cyan   . " guibg=" . s:bg_l . " gui=bold"
-exe "hi LineNr       guifg=#4b5263 guibg=" . s:bg
-exe "hi Visual       guibg=#24314a"
-exe "hi VertSplit    guifg=#15182a guibg=" . s:bg
-exe "hi ColorColumn  guibg=#15182a"
-exe "hi Pmenu        guifg=" . s:fg     . " guibg=" . s:bg_l
-exe "hi PmenuSel     guifg=" . s:bg     . " guibg=" . s:cyan
-exe "hi StatusLine   guifg=" . s:fg     . " guibg=" . s:bg_l
-exe "hi StatusLineNC guifg=" . s:fg_dim . " guibg=" . s:bg_d
-exe "hi TabLine      guifg=" . s:fg_dim . " guibg=" . s:bg_d
-exe "hi TabLineSel   guifg=" . s:cyan   . " guibg=" . s:bg_l . " gui=bold"
-exe "hi TabLineFill  guifg=" . s:fg_dim . " guibg=" . s:bg_d
+hi Normal       guifg=#c8d3f5 guibg=#050811
+hi SignColumn   guifg=#7a88c7 guibg=#050811
+hi CursorLine   guibg=#101320
+hi CursorLineNr guifg=#00f0ff guibg=#101320 gui=bold
+hi LineNr       guifg=#4b5263 guibg=#050811
+hi Visual       guibg=#24314a
+hi VertSplit    guifg=#15182a guibg=#050811
+hi ColorColumn  guibg=#15182a
+
+hi Pmenu        guifg=#c8d3f5 guibg=#101320
+hi PmenuSel     guifg=#050811 guibg=#00f0ff
+hi PmenuSbar    guibg=#02040a
+hi PmenuThumb   guibg=#00b3c4
+
+hi StatusLine   guifg=#c8d3f5 guibg=#101320
+hi StatusLineNC guifg=#7a88c7 guibg=#02040a
+hi TabLine      guifg=#7a88c7 guibg=#02040a
+hi TabLineSel   guifg=#00f0ff guibg=#101320 gui=bold
+hi TabLineFill  guifg=#7a88c7 guibg=#02040a
 
 " Syntax
-exe "hi Comment      guifg=#4b5263 gui=italic"
-exe "hi Constant     guifg=" . s:yellow
-exe "hi String       guifg=" . s:green
-exe "hi Function     guifg=" . s:cyan . " gui=bold"
-exe "hi Identifier   guifg=" . s:cyan
-exe "hi Statement    guifg=" . s:mag
-exe "hi Keyword      guifg=" . s:mag . " gui=italic"
-exe "hi PreProc      guifg=" . s:orange
-exe "hi Type         guifg=" . s:cyan_d
-exe "hi Error        guifg=" . s:bg    . " guibg=" . s:red . " gui=bold"
-exe "hi WarningMsg   guifg=" . s:orange . " gui=bold"
+hi Comment      guifg=#4b5263 gui=italic
+hi Constant     guifg=#ffc857
+hi String       guifg=#a3ff12
+hi Character    guifg=#a3ff12
+hi Number       guifg=#ffc857
+hi Boolean      guifg=#ffc857
+hi Identifier   guifg=#00f0ff
+hi Function     guifg=#00f0ff gui=bold
+hi Statement    guifg=#ff007c
+hi Conditional  guifg=#ff007c
+hi Repeat       guifg=#ff007c
+hi Operator     guifg=#c8d3f5
+hi Keyword      guifg=#ff007c gui=italic
+hi Exception    guifg=#ff007c
+hi PreProc      guifg=#ff9f1c
+hi Include      guifg=#ff9f1c
+hi Define       guifg=#ff9f1c
+hi Type         guifg=#00b3c4
+hi StorageClass guifg=#00b3c4
+hi Structure    guifg=#00b3c4
+hi Typedef      guifg=#00b3c4
+hi Special      guifg=#ffc857
+hi Delimiter    guifg=#c8d3f5
+hi Error        guifg=#050811 guibg=#ff4b5c gui=bold
+hi ErrorMsg     guifg=#050811 guibg=#ff4b5c gui=bold
+hi WarningMsg   guifg=#ff9f1c gui=bold
+hi MoreMsg      guifg=#a3ff12 gui=bold
+hi Question     guifg=#a3ff12 gui=bold
 
 " Diffs
-exe "hi DiffAdd      guifg=" . s:green  . " guibg=#0b2b19"
-exe "hi DiffChange   guifg=" . s:yellow . " guibg=#26210b"
-exe "hi DiffDelete   guifg=" . s:red    . " guibg=#2b0b12"
+hi DiffAdd      guifg=#a3ff12 guibg=#0b2b19
+hi DiffChange   guifg=#ffc857 guibg=#26210b
+hi DiffDelete   guifg=#ff4b5c guibg=#2b0b12
+hi DiffText     guifg=#00f0ff guibg=#0b2230
 
-" ----- CURSOR CGI MODE ----------------------------------------
-set guicursor=n-v-c:block,i-ci:ver25,r-cr:hor20,o:hor50
+" ----- CURSOR STYLE (SAFE) ------------------------------------
 
-" ----- STATUSLINE (SEXY AS HELL) -------------------------------
+if exists('&guicursor')
+  set guicursor=n-v-c:block,i-ci:ver25,r-cr:hor20,o:hor50
+endif
+
+" ----- STATUSLINE ---------------------------------------------
+
 function! NeonMode()
   let l:m = mode()
-  return l:m ==# 'n' ? 'NORMAL' :
-       \ l:m ==# 'i' ? 'INSERT' :
-       \ l:m ==# 'v' ? 'VISUAL' :
-       \ l:m ==# 'V' ? 'V-LINE' :
-       \ l:m ==# '' ? 'V-BLOCK' :
-       \ l:m ==# 'R' ? 'REPLACE' :
-       \ l:m ==# 'c' ? 'COMMAND' :
-       \ l:m
+  if l:m ==# 'n'  | return 'NORMAL'
+  elseif l:m ==# 'i' | return 'INSERT'
+  elseif l:m ==# 'v' | return 'VISUAL'
+  elseif l:m ==# 'V' | return 'V-LINE'
+  elseif l:m ==# "" | return 'V-BLOCK'
+  elseif l:m ==# 'R' | return 'REPLACE'
+  elseif l:m ==# 'c' | return 'COMMAND'
+  endif
+  return l:m
 endfunction
 
 set statusline=
@@ -126,32 +135,39 @@ set statusline+=%#StatusLine#\ %{NeonMode()}\
 set statusline+=%#StatusLine#\ ln\ %l/%L\ col\ %c\ 
 
 " ----- TABLINE ------------------------------------------------
+
 function! NeonTabline()
-  let s = ""
+  let s = ''
   let tcount = tabpagenr('$')
   for i in range(1, tcount)
     let buflist = tabpagebuflist(i)
     let winnr = tabpagewinnr(i)
-    let name = fnamemodify(bufname(buflist[winnr - 1]), ":t")
-    if empty(name)
-      let name = "[No Name]"
+    if len(buflist) == 0
+      let name = '[No Name]'
+    else
+      let bnr = buflist[winnr - 1]
+      let name = fnamemodify(bufname(bnr), ':t')
+      if empty(name)
+        let name = '[No Name]'
+      endif
     endif
     if i == tabpagenr()
-      let s .= "%#TabLineSel# " . i . ": " . name . " "
+      let s .= '%#TabLineSel# ' . i . ': ' . name . ' '
     else
-      let s .= "%#TabLine# " . i . ": " . name . " "
+      let s .= '%#TabLine# ' . i . ': ' . name . ' '
     endif
   endfor
-  let s .= "%#TabLineFill#"
+  let s .= '%#TabLineFill#'
   return s
 endfunction
+
 set tabline=%!NeonTabline()
 
-" ----- KEYMAPS -------------------------------------------------
+" ----- KEYMAPS ------------------------------------------------
 
 let mapleader=" "
 
-" Better splits navigation
+" Window nav
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -161,7 +177,7 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader>v :vsplit<CR>
 nnoremap <leader>h :split<CR>
 
-" Save/Quit
+" Save / quit
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :qa!<CR>
@@ -172,7 +188,7 @@ nnoremap <leader><space> :nohlsearch<CR>
 " Fast escape
 inoremap jk <Esc>
 
-" Move lines up/down
+" Move selected lines
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -182,28 +198,24 @@ nnoremap <leader>tt :split | terminal<CR>
 " Toggle relativenumber
 nnoremap <leader>rn :set relativenumber!<CR>
 
-" ----- FILETYPE-SPECIFIC SETTINGS -----------------------------
+" ----- FILETYPE SETTINGS --------------------------------------
 
 augroup AbhiLang
   autocmd!
-
   " Python = 4 spaces
   autocmd FileType python  setlocal tabstop=4 shiftwidth=4 expandtab
-
   " Bash/Zsh = 2 spaces
   autocmd FileType sh,bash,zsh setlocal tabstop=2 shiftwidth=2 expandtab
-
   " C/C++ = 4 spaces
   autocmd FileType c,cpp,h,hpp setlocal tabstop=4 shiftwidth=4 expandtab
-
   " Rust = 4 spaces
   autocmd FileType rust setlocal tabstop=4 shiftwidth=4 expandtab
-
   " Go = tabs, width 4
   autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4
 augroup END
 
 " ----- DIM INACTIVE WINDOWS -----------------------------------
+
 augroup NeonDim
   autocmd!
   autocmd WinEnter,BufWinEnter * setlocal cursorline
