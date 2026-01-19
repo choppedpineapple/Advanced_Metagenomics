@@ -1,7 +1,3 @@
-Show me the most common difficult interview questions around pandas library in python. I'm trying to learn as beginner (both pandas and python). Tell me how to solve them as well.
-
-## Common Difficult Pandas Interview Questions for Beginners
-
 The most challenging pandas interview questions for beginners typically focus on data manipulation, filtering, and combining datasets [1][2]. Here are the key questions you should prepare for:
 
 ### Understanding loc vs iloc
