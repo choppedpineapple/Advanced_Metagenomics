@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import sys
 import polars as pl
 from pathlib import Path
@@ -12,7 +13,6 @@ light_df = pl.read_csv(light_output, separator="\t")
 print(heavy_df.head(5))
 print(light_df.head(5))
 
-# FIX 3: Added () to header.strip() — was a method reference, not a call
 headers_heavy = [header + "_heavy" if header.strip() else header for header in heavy_df.columns]
 heavy_renamed = heavy_df.rename({old: new for old, new in zip(heavy_df.columns, headers_heavy)})
 
@@ -49,7 +49,6 @@ merged_al_cleaned = merged_subset.with_columns(
 print(f"Number of rows before alignment gaps are removed: {len(merged_subset)}")
 print(f"Number of rows after alignment gaps are removed: {len(merged_al_cleaned)}")
 
-# FIX 2: Invalid polars filter syntax — keyword args don't work here
 msub_no_stop_codons = merged_al_cleaned.filter(
     (pl.col("stop_codon_heavy") == "F") & (pl.col("stop_codon_light") == "F")
 )
@@ -77,10 +76,8 @@ print(f"Number of rows before removing empty cells: {rows_with_empty}")
 print(f"Number of rows after removing rows with empty cells: {rows_without_empty}")
 print(f"Number of rows with empty values or nulls (removed): {rows_with_empty - rows_without_empty}")
 
-# FIX 4: Nested same-type quotes inside f-string — use single quotes inside
 print(f"Memory: {msub_null_clean.estimated_size('mb'):.2f} megabytes")
 
-# FIX 1: Create the output directory BEFORE trying to write files into it
 path = Path().cwd() / "igblast_tsv_files"
 path.mkdir(exist_ok=True)
 print(f"Path where TSV files will be stored: {path}")
@@ -115,7 +112,6 @@ for tsv in path.glob("*.tsv"):
     for i, seq in enumerate(tsv_df.iter_rows(named=True)):
         if seq["cdr3_aa_light"] not in lcdr3_groups:
             lcdr3_groups[seq["cdr3_aa_light"]] = []
-        # FIX 4: Single quotes inside f-strings
         lcdr3_groups[seq["cdr3_aa_light"]].append(f">{seq['sequence_id_heavy']}\n{seq['sequence_alignment_heavy']}\n")
 
     for cdr3, records in lcdr3_groups.items():
@@ -127,7 +123,6 @@ for tsv in path.glob("*.tsv"):
     for i, seq in enumerate(tsv_df.iter_rows(named=True)):
         if seq["cdr3_aa_light"] not in lcdr3_groups_2:
             lcdr3_groups_2[seq["cdr3_aa_light"]] = []
-        # FIX 4: Single quotes inside f-strings
         lcdr3_groups_2[seq["cdr3_aa_light"]].append(f">{seq['sequence_id_heavy']}\n{seq['sequence_alignment_light']}\n")
 
     for cdr3, records in lcdr3_groups_2.items():
@@ -147,5 +142,4 @@ for fasta in heavy_fasta.glob("*.fasta"):
         fasta_above_cut_off += 1
 
 print(f"There are {fasta_above_cut_off} files with more than {count_cut_off} sequences")
-# FIX 4: Single quotes inside f-string
 print(f"Number of FASTA files: {len(list(heavy_fasta.glob('*.fasta')))}")
