@@ -28,10 +28,6 @@ def calculate_variant_enrichment(
     post_fastq: str,
     primer_regex: str
 ) -> pl.DataFrame:
-    """
-    Calculates log2 fold change enrichment for HCDR3 sequences, internally controlled 
-    by primer variants.
-    """
     # 1. Extract primer variants from both FASTQ files
     df_pre_primers = extract_primer_variants(pre_fastq, primer_regex)
     df_post_primers = extract_primer_variants(post_fastq, primer_regex)
