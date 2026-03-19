@@ -24,14 +24,24 @@ heavy_renamed = heavy_df.rename({old: new for old, new in zip(heavy_df.columns, 
 headers_light = [header + "_light" if header.strip() else header for header in light_df.columns]
 light_renamed = light_df.rename({old: new for old, new in zip(light_df.columns, headers_light)})
 
-# Extract seq_key and the Vsearch size/count from the heavy header
+# Clean up heavy dataframe: extract the count, and strip out the size tag to create a clean key
 heavy_clean = heavy_renamed.with_columns(
-    pl.col("sequence_id_heavy").str.extract(r"(sequence_\d+)").alias("seq_key"),
-    pl.col("sequence_id_heavy").str.extract(r"size[=_](\d+)").cast(pl.Int32).fill_null(1).alias("clone_count")
+    pl.col("sequence_id_heavy")
+    .str.extract(r"size[=_](\d+)")
+    .cast(pl.Int32)
+    .fill_null(1)
+    .alias("clone_count"),
+    
+    pl.col("sequence_id_heavy")
+    .str.replace(r"[;_]*size[=_]\d+.*", "")
+    .alias("seq_key")
 )
 
+# Clean up light dataframe: create the clean key so it matches the heavy dataframe
 light_clean = light_renamed.with_columns(
-    pl.col("sequence_id_light").str.extract(r"(sequence_\d+)").alias("seq_key")
+    pl.col("sequence_id_light")
+    .str.replace(r"[;_]*size[=_]\d+.*", "")
+    .alias("seq_key")
 )
 
 merged_df = heavy_clean.join(light_clean, left_on="seq_key", right_on="seq_key", how="inner")
@@ -96,7 +106,7 @@ top_20_hcdr3s.write_csv("top_20_hcdr3s.csv")
 
 top_20_seqs = top_20_hcdr3s["cdr3_aa_heavy"].to_list()
 
-# Finding the top HCDR3s clusters
+# Finding the top HCDR3 clusters
 for i, seq in enumerate(top_20_seqs, 1):
     cluster_df = msub_null_clean.filter(pl.col("sequence_aa_heavy").str.contains(seq))
     filename = f"igblast_tsv_files/{seq}_cluster.tsv"
@@ -154,12 +164,12 @@ for tsv in path.glob("*.tsv"):
 fasta_above_cut_off = 0
 count_cut_off = 20
 
+# Sum the actual sequences via vsearch size annotation
 for fasta in heavy_fasta.glob("*.fasta"):
     total_abundance = 0
     with open(fasta, 'r') as fa:
         for line in fa:
             if line.startswith(">"):
-                # Extract size from header, default to 1 if not present
                 match = re.search(r"size[=_](\d+)", line)
                 if match:
                     total_abundance += int(match.group(1))
